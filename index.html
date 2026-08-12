@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Proposal ❤️</title>
+
+<title>Ganpati Bappa Morya</title>
 
 <style>
 *{
@@ -12,243 +13,105 @@
     box-sizing:border-box;
 }
 
-body{
-    height:100vh;
-    overflow:hidden;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb6c1);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial,sans-serif;
-}
-
-.scene{
+html,body{
     width:100%;
     height:100%;
-    position:relative;
+    overflow:hidden;
+    background:#000;
+}
+
+.welcome{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:#000;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.content{
+.welcome img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    padding-bottom:45px;
+    background:linear-gradient(
+        transparent 55%,
+        rgba(0,0,0,.75)
+    );
+}
+
+.title{
+    color:#FFD700;
+    font-size:clamp(30px,8vw,70px);
+    font-weight:bold;
     text-align:center;
-    position:relative;
-    z-index:5;
+    text-shadow:0 0 15px #000,0 0 25px #D4AF37;
+    animation:glow 2s infinite alternate;
 }
 
-.boy{
-    position:relative;
-    width:150px;
-    height:260px;
-    margin:auto;
-    animation:appear 2s ease forwards;
-}
-
-.head{
-    width:65px;
-    height:65px;
-    background:#f2b07b;
-    border-radius:50%;
-    position:absolute;
-    top:5px;
-    left:43px;
-    z-index:3;
-}
-
-.hair{
-    width:68px;
-    height:30px;
-    background:#21150f;
-    border-radius:50% 50% 20% 20%;
-    position:absolute;
-    top:0;
-    left:41px;
-    z-index:4;
-}
-
-.body{
-    width:85px;
-    height:105px;
-    background:#3155a6;
-    border-radius:25px 25px 10px 10px;
-    position:absolute;
-    top:65px;
-    left:33px;
-}
-
-.arm-left{
-    width:22px;
-    height:105px;
-    background:#f2b07b;
-    border-radius:20px;
-    position:absolute;
-    top:75px;
-    left:20px;
-    transform:rotate(25deg);
-}
-
-.arm-right{
-    width:22px;
-    height:105px;
-    background:#f2b07b;
-    border-radius:20px;
-    position:absolute;
-    top:72px;
-    right:15px;
-    transform:rotate(-65deg);
-    transform-origin:top;
-}
-
-.rose{
-    position:absolute;
-    right:-5px;
-    top:145px;
-    font-size:48px;
-    transform:rotate(-15deg);
-    animation:rose 1.2s infinite alternate;
-}
-
-.leg-left{
-    width:30px;
-    height:85px;
-    background:#202020;
-    position:absolute;
-    top:155px;
-    left:48px;
-    border-radius:20px;
-    transform:rotate(80deg);
-}
-
-.leg-right{
-    width:30px;
-    height:85px;
-    background:#202020;
-    position:absolute;
-    top:155px;
-    left:75px;
-    border-radius:20px;
-    transform:rotate(100deg);
-}
-
-h1{
+.subtitle{
     color:white;
-    font-size:38px;
-    margin-top:15px;
-    text-shadow:0 3px 10px #b00040;
-    animation:fade 2s ease 1s both;
+    font-size:clamp(16px,4vw,25px);
+    margin-top:8px;
+    text-align:center;
 }
 
-p{
-    color:white;
-    font-size:22px;
-    margin-top:12px;
-    animation:fade 2s ease 1.5s both;
-}
-
-button{
-    margin-top:25px;
-    padding:14px 35px;
-    border:none;
-    border-radius:30px;
-    background:white;
-    color:#ff3974;
-    font-size:20px;
+.enter-btn{
+    margin-top:20px;
+    padding:13px 35px;
+    border:2px solid #D4AF37;
+    border-radius:40px;
+    background:#111;
+    color:#FFD700;
+    font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    box-shadow:0 5px 20px rgba(0,0,0,.2);
-    animation:fade 2s ease 2s both;
 }
 
-button:hover{
-    transform:scale(1.08);
+.enter-btn:active{
+    transform:scale(.95);
 }
 
-.heart{
-    position:absolute;
-    color:white;
-    font-size:25px;
-    animation:float 5s linear infinite;
-    opacity:.8;
-}
-
-.heart:nth-child(1){left:10%;animation-delay:0s;}
-.heart:nth-child(2){left:25%;animation-delay:1s;}
-.heart:nth-child(3){left:70%;animation-delay:2s;}
-.heart:nth-child(4){left:85%;animation-delay:3s;}
-.heart:nth-child(5){left:50%;animation-delay:1.5s;}
-
-@keyframes appear{
-    from{transform:translateY(300px) scale(.5);opacity:0;}
-    to{transform:translateY(0) scale(1);opacity:1;}
-}
-
-@keyframes rose{
-    from{transform:rotate(-15deg) scale(1);}
-    to{transform:rotate(10deg) scale(1.15);}
-}
-
-@keyframes fade{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;transform:translateY(0);}
-}
-
-@keyframes float{
-    0%{
-        bottom:-50px;
-        transform:translateX(0) rotate(0);
-        opacity:0;
+@keyframes glow{
+    from{
+        text-shadow:0 0 10px #D4AF37;
     }
-    20%{opacity:1;}
-    100%{
-        bottom:110%;
-        transform:translateX(80px) rotate(360deg);
-        opacity:0;
+    to{
+        text-shadow:0 0 30px #FFD700;
     }
-}
-
-@media(max-width:600px){
-    h1{font-size:30px;}
-    p{font-size:18px;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="scene">
+<div class="welcome">
 
-    <div class="heart">❤️</div>
-    <div class="heart">💖</div>
-    <div class="heart">💕</div>
-    <div class="heart">❤️</div>
-    <div class="heart">💗</div>
+    <img src="ganpati.png" alt="Ganpati Bappa Morya">
 
-    <div class="content">
+    <div class="overlay">
 
-        <div class="boy">
-
-            <div class="hair"></div>
-            <div class="head"></div>
-
-            <div class="body"></div>
-
-            <div class="arm-left"></div>
-            <div class="arm-right"></div>
-
-            <div class="rose">🌹</div>
-
-            <div class="leg-left"></div>
-            <div class="leg-right"></div>
-
+        <div class="title">
+            गणपति बप्पा मोरया 🙏
         </div>
 
-        <h1>Will You Be Mine? ❤️</h1>
+        <div class="subtitle">
+            मंगलमूर्ति मोरया
+        </div>
 
-        <p>I Have Something Special To Ask You...</p>
-
-        <button onclick="propose()">
-            💍 YES ❤️
+        <button class="enter-btn" onclick="enterWebsite()">
+            ENTER WEBSITE
         </button>
 
     </div>
@@ -256,14 +119,8 @@ button:hover{
 </div>
 
 <script>
-function propose(){
-    document.querySelector("h1").innerHTML =
-        "You Said YES! ❤️😍";
-    
-    document.querySelector("p").innerHTML =
-        "I Love You Forever! 💕🌹";
-    
-    document.querySelector("button").style.display="none";
+function enterWebsite(){
+    window.location.href = "home.html";
 }
 </script>
 
