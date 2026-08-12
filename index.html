@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Chanda Request</title>
+<title>Best Friend Biryani Invitation 🍗🍚</title>
 
 <style>
 *{
@@ -14,95 +13,149 @@
 }
 
 body{
-    width:100%;
     min-height:100vh;
-    background:#000;
-    font-family:Arial,sans-serif;
     overflow:hidden;
-}
-
-.container{
-    position:relative;
-    width:100%;
-    height:100vh;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#fff3d6,#ffd6a5,#ffb4a2);
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.container img{
+.container{
     width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* Dark overlay */
-.overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.05),
-        rgba(0,0,0,0.15) 45%,
-        rgba(0,0,0,0.90)
-    );
-}
-
-/* Message */
-.message{
-    position:absolute;
-    bottom:35px;
-    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
     text-align:center;
-    padding:0 15px;
 }
 
-.message h1{
-    color:#FFD700;
-    font-size:clamp(28px,7vw,55px);
-    text-shadow:
-        0 3px 8px #000,
-        0 0 15px #D4AF37;
-    margin-bottom:12px;
+.card{
+    width:90%;
+    max-width:420px;
+    padding:30px 20px;
+    background:rgba(255,255,255,.9);
+    border-radius:30px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    position:relative;
+    z-index:5;
+    animation:pop 1s ease;
 }
 
-.message p{
-    color:white;
-    font-size:clamp(17px,4vw,25px);
+.biryani{
+    font-size:110px;
+    animation:bounce 1.5s infinite;
+    filter:drop-shadow(0 8px 8px rgba(0,0,0,.2));
+}
+
+h1{
+    color:#8b3a16;
+    font-size:32px;
+    margin:10px 0;
+}
+
+h2{
+    color:#d35400;
+    font-size:24px;
+    margin:12px 0;
+}
+
+p{
+    color:#555;
+    font-size:18px;
+    line-height:1.5;
     margin-bottom:20px;
 }
 
-/* Amount buttons */
-.buttons{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.amount{
-    padding:12px 22px;
-    border:2px solid #FFD700;
+button{
+    border:0;
+    padding:15px 28px;
     border-radius:30px;
-    background:rgba(0,0,0,.75);
-    color:#FFD700;
-    font-size:17px;
+    font-size:18px;
     font-weight:bold;
     cursor:pointer;
+    background:#e67e22;
+    color:white;
+    box-shadow:0 7px 15px rgba(0,0,0,.2);
+    transition:.3s;
 }
 
-.amount:active{
-    transform:scale(.92);
-    background:#FFD700;
-    color:#000;
+button:hover{
+    transform:scale(1.08);
 }
 
-#thanks{
-    display:none;
-    margin-top:15px;
-    color:#fff;
-    font-size:20px;
+#result{
+    margin-top:20px;
+    font-size:22px;
     font-weight:bold;
+    color:#27ae60;
+    display:none;
+}
+
+.emoji{
+    position:absolute;
+    font-size:30px;
+    animation:float 6s linear infinite;
+}
+
+.e1{left:5%;bottom:-50px;animation-delay:0s;}
+.e2{left:20%;bottom:-50px;animation-delay:1s;}
+.e3{left:75%;bottom:-50px;animation-delay:2s;}
+.e4{left:90%;bottom:-50px;animation-delay:3s;}
+.e5{left:50%;bottom:-50px;animation-delay:4s;}
+
+@keyframes pop{
+    0%{
+        transform:scale(.3) rotate(-10deg);
+        opacity:0;
+    }
+    100%{
+        transform:scale(1) rotate(0);
+        opacity:1;
+    }
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0) rotate(-3deg);
+    }
+    50%{
+        transform:translateY(-15px) rotate(3deg);
+    }
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:0;
+    }
+    20%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+@media(max-width:500px){
+    .biryani{
+        font-size:85px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+    h2{
+        font-size:21px;
+    }
+
+    p{
+        font-size:16px;
+    }
 }
 </style>
 </head>
@@ -111,41 +164,32 @@ body{
 
 <div class="container">
 
-    <!-- Apni uploaded image ka naam -->
-    <img src="13853.png" alt="Namaste">
+    <div class="emoji e1">🍗</div>
+    <div class="emoji e2">❤️</div>
+    <div class="emoji e3">🍚</div>
+    <div class="emoji e4">😋</div>
+    <div class="emoji e5">🌹</div>
 
-    <div class="overlay"></div>
+    <div class="card">
 
-    <div class="message">
+        <div class="biryani">🍛</div>
 
-        <h1>🙏 नमस्ते 🙏</h1>
+        <h1>Oye Bestie! 😎❤️</h1>
+
+        <h2>Ek Important Invitation Hai! 🍗🍚</h2>
 
         <p>
-            इस बार कितना चंदा दीजिएगा?
+            Dosti mein ek chhoti si demand hai... 😂<br>
+            Mere saath <b>Biryani Khane Chalo!</b> 😋🔥
         </p>
 
-        <div class="buttons">
+        <button onclick="accept()">
+            🍗 Biryani Ke Liye YES!
+        </button>
 
-            <button class="amount" onclick="donate(101)">
-                ₹101
-            </button>
-
-            <button class="amount" onclick="donate(251)">
-                ₹251
-            </button>
-
-            <button class="amount" onclick="donate(501)">
-                ₹501
-            </button>
-
-            <button class="amount" onclick="donate(1100)">
-                ₹1100
-            </button>
-
-        </div>
-
-        <div id="thanks">
-            ❤️ बहुत-बहुत धन्यवाद! 🙏
+        <div id="result">
+            🎉 Done Bestie! 🎉<br>
+            Biryani Meri Taraf Se! 😎🍗❤️
         </div>
 
     </div>
@@ -153,12 +197,40 @@ body{
 </div>
 
 <script>
-function donate(amount){
+function accept(){
 
-    document.getElementById("thanks").style.display = "block";
+    document.getElementById("result").style.display = "block";
 
-    document.querySelector(".message p").innerHTML =
-        "आपने ₹" + amount + " चुना है ❤️";
+    document.querySelector("button").style.display = "none";
+
+    document.querySelector("h2").innerHTML =
+        "Biryani Party Confirmed! 🎉🍗";
+
+    for(let i=0;i<25;i++){
+
+        let heart = document.createElement("div");
+
+        heart.innerHTML = ["❤️","🍗","🍚","🎉","😋"][Math.floor(Math.random()*5)];
+
+        heart.style.position = "fixed";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.top = "100vh";
+        heart.style.fontSize = (20 + Math.random()*25) + "px";
+        heart.style.zIndex = "10";
+        heart.style.transition = "transform 3s ease, opacity 3s ease";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.style.transform =
+                "translateY(-110vh) rotate(360deg)";
+            heart.style.opacity = "0";
+        },50);
+
+        setTimeout(()=>{
+            heart.remove();
+        },3100);
+    }
 }
 </script>
 
