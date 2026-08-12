@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ganpati Bappa Morya</title>
+<title>Chanda Request</title>
 
 <style>
 *{
@@ -13,114 +13,152 @@
     box-sizing:border-box;
 }
 
-html,body{
+body{
     width:100%;
-    height:100%;
-    overflow:hidden;
+    min-height:100vh;
     background:#000;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
 }
 
-.welcome{
-    position:fixed;
-    inset:0;
+.container{
+    position:relative;
     width:100%;
-    height:100%;
-    background:#000;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-.welcome img{
+.container img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
+/* Dark overlay */
 .overlay{
     position:absolute;
     inset:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    align-items:center;
-    padding-bottom:45px;
     background:linear-gradient(
-        transparent 55%,
-        rgba(0,0,0,.75)
+        to bottom,
+        rgba(0,0,0,0.05),
+        rgba(0,0,0,0.15) 45%,
+        rgba(0,0,0,0.90)
     );
 }
 
-.title{
-    color:#FFD700;
-    font-size:clamp(30px,8vw,70px);
-    font-weight:bold;
+/* Message */
+.message{
+    position:absolute;
+    bottom:35px;
+    width:100%;
     text-align:center;
-    text-shadow:0 0 15px #000,0 0 25px #D4AF37;
-    animation:glow 2s infinite alternate;
+    padding:0 15px;
 }
 
-.subtitle{
+.message h1{
+    color:#FFD700;
+    font-size:clamp(28px,7vw,55px);
+    text-shadow:
+        0 3px 8px #000,
+        0 0 15px #D4AF37;
+    margin-bottom:12px;
+}
+
+.message p{
     color:white;
-    font-size:clamp(16px,4vw,25px);
-    margin-top:8px;
-    text-align:center;
+    font-size:clamp(17px,4vw,25px);
+    margin-bottom:20px;
 }
 
-.enter-btn{
-    margin-top:20px;
-    padding:13px 35px;
-    border:2px solid #D4AF37;
-    border-radius:40px;
-    background:#111;
+/* Amount buttons */
+.buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.amount{
+    padding:12px 22px;
+    border:2px solid #FFD700;
+    border-radius:30px;
+    background:rgba(0,0,0,.75);
     color:#FFD700;
-    font-size:16px;
+    font-size:17px;
     font-weight:bold;
     cursor:pointer;
 }
 
-.enter-btn:active{
-    transform:scale(.95);
+.amount:active{
+    transform:scale(.92);
+    background:#FFD700;
+    color:#000;
 }
 
-@keyframes glow{
-    from{
-        text-shadow:0 0 10px #D4AF37;
-    }
-    to{
-        text-shadow:0 0 30px #FFD700;
-    }
+#thanks{
+    display:none;
+    margin-top:15px;
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="welcome">
+<div class="container">
 
-    <img src="ganpati.png" alt="Ganpati Bappa Morya">
+    <!-- Apni uploaded image ka naam -->
+    <img src="13853.png" alt="Namaste">
 
-    <div class="overlay">
+    <div class="overlay"></div>
 
-        <div class="title">
-            गणपति बप्पा मोरया 🙏
+    <div class="message">
+
+        <h1>🙏 नमस्ते 🙏</h1>
+
+        <p>
+            इस बार कितना चंदा दीजिएगा?
+        </p>
+
+        <div class="buttons">
+
+            <button class="amount" onclick="donate(101)">
+                ₹101
+            </button>
+
+            <button class="amount" onclick="donate(251)">
+                ₹251
+            </button>
+
+            <button class="amount" onclick="donate(501)">
+                ₹501
+            </button>
+
+            <button class="amount" onclick="donate(1100)">
+                ₹1100
+            </button>
+
         </div>
 
-        <div class="subtitle">
-            मंगलमूर्ति मोरया
+        <div id="thanks">
+            ❤️ बहुत-बहुत धन्यवाद! 🙏
         </div>
-
-        <button class="enter-btn" onclick="enterWebsite()">
-            ENTER WEBSITE
-        </button>
 
     </div>
 
 </div>
 
 <script>
-function enterWebsite(){
-    window.location.href = "home.html";
+function donate(amount){
+
+    document.getElementById("thanks").style.display = "block";
+
+    document.querySelector(".message p").innerHTML =
+        "आपने ₹" + amount + " चुना है ❤️";
 }
 </script>
 
