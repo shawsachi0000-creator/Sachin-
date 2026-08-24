@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Simmi's Little Museum</title>
+<style>
+:root{
+  --paper:#f7f0e6;--ink:#171310;--muted:#8d7e70;--orange:#e59a24;
+  --pink:#e86b80;--line:#cdbca8;--dark:#071512;--cream:#fffaf1;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Georgia,"Times New Roman",serif;background:#050807;color:var(--ink)}
+#app{height:100svh;width:100%;position:relative;overflow:hidden;background:var(--dark)}
+.screen{
+  position:absolute;inset:0;display:none;overflow:hidden;
+}
+.screen.active{display:flex;animation:pageIn .55s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.page{
+  width:min(100%,480px);height:100%;margin:auto;background:var(--paper);
+  position:relative;overflow:auto;padding:30px 24px 95px;
+}
+.darkPage{background:radial-gradient(circle at 50% 45%,#1d342f,#06100e 63%);color:#f6efe6}
+.darkPage .page{background:transparent}
+.center{display:flex;align-items:center;justify-content:center;text-align:center}
+.eyebrow{font:700 10px system-ui;letter-spacing:3.5px;text-transform:uppercase;color:#b18b54}
+.darkPage .eyebrow{color:#d6a64d}
+h1{font-size:clamp(43px,12vw,70px);line-height:.9;letter-spacing:-3px;margin:14px 0}
+h2{font-size:39px;line-height:.95;letter-spacing:-1.5px;margin:10px 0 15px}
+p{font-size:16px;line-height:1.7}
+.darkPage h1 span{color:#e5a035}
+.muted{color:var(--muted);font:15px/1.65 system-ui}
+.darkPage .muted{color:#bdb5aa}
+.btn{
+  border:0;border-radius:8px;padding:14px 22px;background:#e39a24;color:#1a130b;
+  font:800 14px system-ui;box-shadow:0 9px 25px #8b5c1b22
+}
+.btn.dark{background:#15120f;color:#fff}.btn.pink{background:#e86b80;color:#fff}
+.btn:disabled{opacity:.35}
+.top{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;
+  font:700 10px system-ui;letter-spacing:2px;text-transform:uppercase;color:#8d7c6b
+}
+.dots{display:flex;gap:5px}
+.dot{width:24px;height:3px;background:#d5c6b7;border-radius:9px}.dot.on{background:var(--orange)}
+.rule{height:1px;background:var(--line);margin:20px 0}
+.door{
+  width:150px;height:215px;border:2px solid #b88a4c;border-radius:80px 80px 8px 8px;
+  margin:25px auto 20px;position:relative;background:linear-gradient(90deg,#0a201c,#193d34,#071613);
+  box-shadow:0 0 55px #d99b3a22,inset 0 0 30px #000;
+}
+.door:after{content:"";position:absolute;width:58px;height:24px;border:1px solid #d4a455;border-radius:50%;
+left:44px;top:86px;transform:rotate(-15deg)}
+.spot{position:absolute;left:50%;top:45%;width:150px;height:240px;transform:translate(-50%,-50%);
+background:radial-gradient(ellipse,#ffe6a877,transparent 67%);filter:blur(5px);animation:spot 2.8s infinite alternate}
+@keyframes spot{to{transform:translate(-50%,-50%) scale(1.18)}}
+.band{
+ width:250px;height:105px;margin:25px auto;border:12px solid #d88a32;border-radius:55px;
+ position:relative;box-shadow:0 0 35px #d88a3240;transform:rotate(-8deg)
+}
+.band:before,.band:after{content:"";position:absolute;background:#eab16b}
+.band:before{width:15px;height:60px;left:38px;top:10px}.band:after{width:15px;height:60px;right:38px;top:10px}
+.counter{display:flex;justify-content:center;gap:8px;margin:22px 0}
+.stat{width:88px;border:1px solid var(--line);padding:12px 4px;background:#fff8ef}
+.stat b{display:block;font-size:26px;color:#d98c20}.stat small{font:9px system-ui;letter-spacing:1px;color:#887a6d}
+.photoGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.photo{
+ aspect-ratio:1;border:1px solid #cbb9a7;background:#eadfce;position:relative;
+ display:flex;align-items:center;justify-content:center;text-align:center;color:#87786a;
+ overflow:hidden
+}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo span{font:700 11px system-ui;letter-spacing:1px}
+.photo input{display:none}
+.photoAdd{position:absolute;right:6px;bottom:6px;border:0;border-radius:50%;width:31px;height:31px;background:#e39a24;color:#17110b;font-weight:900}
+.noteBox{border:1px solid var(--line);background:#fffaf3;padding:18px;margin:18px 0;box-shadow:0 10px 25px #7a5d3a12}
+.puzzle{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;width:min(330px,100%);aspect-ratio:1;margin:20px auto;border:6px solid #d8c5ae;background:#d8c5ae}
+.tile{border:0;background-size:300% 300%;padding:0;cursor:pointer;position:relative}
+.tile.sel{outline:4px solid #e39a24;z-index:2}
+.envelope{width:280px;height:175px;margin:30px auto;position:relative;background:#d88b31;box-shadow:0 18px 45px #7a4d2222;cursor:pointer}
+.envelope:before{content:"";position:absolute;inset:0;background:#edb45c;clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%)}
+.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:55px;height:55px;border-radius:50%;background:#e34f5f;color:#fff;display:grid;place-items:center;font-size:25px;z-index:2}
+.letter{display:none;background:#fffdf7;border:1px solid #d6c7b7;padding:22px;box-shadow:0 15px 35px #80634218}
+.letter.open{display:block;animation:open .6s ease}
+@keyframes open{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.letter p{font-size:17px}.sig{font-size:25px;font-style:italic;color:#a46b2b}
+.check{display:flex;align-items:flex-start;gap:12px;padding:14px 2px;border-bottom:1px solid #d9c9b8;font:15px/1.45 system-ui}
+.check input{width:20px;height:20px;accent-color:#e86b80;margin-top:2px}
+.check.done span{text-decoration:line-through;color:#9b8d81}
+.signaturePad{height:150px;border:1px dashed #a99580;background:#fffaf3;touch-action:none;margin:16px 0}
+.signaturePad canvas{width:100%;height:100%;display:block}
+.final{text-align:center;padding-top:12vh}.final .bigHeart{font-size:80px;animation:beat 1.1s infinite}
+@keyframes beat{50%{transform:scale(1.16)}}
+.final h2{font-size:55px}.tiny{font:11px system-ui;color:#9c8c7b;letter-spacing:2px}
+.toast{position:absolute;left:50%;bottom:76px;transform:translateX(-50%);background:#171310;color:#fff;padding:11px 15px;border-radius:20px;font:12px system-ui;z-index:50;opacity:0;pointer-events:none;transition:.3s}
+.toast.show{opacity:1}
+.nav{position:absolute;bottom:0;left:0;right:0;height:78px;padding:14px 22px;background:linear-gradient(transparent,var(--paper) 25%);display:flex;justify-content:space-between;align-items:end;z-index:20}
+.darkPage .nav{background:linear-gradient(transparent,#06100e 25%)}
+.back{background:#171310;color:#fff}
+@media(min-width:600px){.page{border-radius:25px;box-shadow:0 25px 90px #0008}.screen{padding:4vh 0}}
+</style>
+</head>
+<body>
+<div id="app">
+<canvas id="fx"></canvas>
+
+<section class="screen active darkPage" id="s0">
+<div class="page center">
+<div>
+<div class="eyebrow">CLOSED TO THE PUBLIC · ONE GUEST ONLY</div>
+<div class="door"><div class="spot"></div></div>
+<h1>Simmi built<br><span>a little museum.</span></h1>
+<p class="muted">A tiny collection of memories, moments and things that deserved their own room.</p>
+<button class="btn" onclick="go(1)">Come in, Simmi →</button>
+</div></div>
+</section>
+
+<section class="screen" id="s1"><div class="page">
+<div class="top"><span>Room 01 · Friendship</span><span class="dots" data-room="1"></span></div>
+<div class="eyebrow">FIRST, YOUR FRIENDSHIP BAND</div>
+<h2>A little thing.<br>A big meaning.</h2>
+<p class="muted">Not everything special needs to be expensive. Some things just need to mean something.</p>
+<div class="band"></div>
+<div class="noteBox"><b>For Simmi</b><br><span class="muted">This one is for every laugh, every random conversation and every moment that somehow became a memory.</span></div>
+<button class="btn pink" onclick="go(2)">Wear it →</button>
+<div class="nav"><button class="btn back" onclick="back()">← Back</button></div>
+</div></section>
+
+<section class="screen" id="s2"><div class="page">
+<div class="top"><span>Room 02 · Time</span><span class="dots" data-room="2"></span></div>
+<div class="eyebrow">WE HAVE BEEN FRIENDS FOR</div>
+<h2 style="text-align:center"><span id="count">365</span><br><small style="font:700 12px system-ui;letter-spacing:3px;color:#a78b78">DAYS & COUNTING</small></h2>
+<div class="counter"><div class="stat"><b>∞</b><small>LAUGHS</small></div><div class="stat"><b>52</b><small>WEEKS</small></div><div class="stat"><b>♥</b><small>MEMORIES</small></div></div>
+<div class="noteBox"><p style="margin:0">365 is just a number. What matters is how many little moments are hiding behind it.</p></div>
+<button class="btn pink" onclick="go(3)">See our photos →</button>
+<div class="nav"><button class="btn back" onclick="back()">← Back</button></div>
+</div></section>
+
+<section class="screen" id="s3"><div class="page">
+<div class="top"><span>Room 03 · Our Photos</span><span class="dots" data-room="3"></span></div>
+<div class="eyebrow">YOU CAN ADD YOUR OWN PHOTOS</div>
+<h2>Our photos</h2>
+<p class="muted">Tap the + and choose your favourite pictures. They stay inside this page on your device.</p>
+<div class="photoGrid" id="photos"></div>
+<button class="btn pink" onclick="startPuzzle()">Keep moving →</button>
+<div class="nav"><button class="btn back" onclick="back()">← Back</button></div>
+</div></section>
+
+<section class="screen" id="s4"><div class="page">
+<div class="top"><span>Room 04 · The Puzzle</span><span class="dots" data-room="4"></span></div>
+<div class="eyebrow">THIS PHOTO FELL APART</div>
+<h2>Can you put<br>it back together?</h2>
+<p class="muted">Tap two pieces to swap them. Complete the picture to open the next room.</p>
+<div class="puzzle" id="puzzle"></div>
+<div class="tiny" id="puzzleMsg">0 / 9 pieces in place</div>
+<button class="btn pink" id="puzzleNext" disabled onclick="go(5)">Puzzle complete →</button>
+<div class="nav"><button class="btn back" onclick="back()">← Back</button></div>
+</div></section>
+
+<section class="screen" id="s5"><div class="page">
+<div class="top"><span>Room 05 · A Letter</span><span class="dots" data-room="5"></span></div>
+<div class="eyebrow">A LETTER, SEALED JUST FOR YOU</div>
+<h2>Open when<br>you're ready.</h2>
+<div class="envelope" onclick="openLetter()"><div class="seal">♥</div></div>
+<div class="tiny" style="text-align:center">Tap the seal</div>
+<div class="letter" id="letter">
+<p>Dear <b>Simmi</b>,</p>
+<p>I wanted to make something that felt a little more personal than a normal birthday wish.</p>
+<p>Some people become important quietly. No announcement, no warning — they just become part of the good memories.</p>
+<p>I hope this year gives you reasons to laugh until your cheeks hurt, people who make you feel understood, and moments you wish you could replay.</p>
+<p>Most importantly, never forget that you are genuinely special.</p>
+<p class="sig">— With lots of good wishes ❤️</p>
+</div>
+<button class="btn pink" id="letterNext" disabled onclick="go(6)" style="margin-top:18px">Continue →</button>
+<div class="nav"><button class="btn back" onclick="back()">← Back</button></div>
+</div></section>
+
+<section class="screen" id="s6"><div class="page">
+<div class="top"><span>Room 06 · Promises</span><span class="dots" data-room="6"></span></div>
+<div class="eyebrow">TICK EACH PROMISE, THEN UNLOCK</div>
+<h2>Our little<br>promises.</h2>
+<div id="checks">
+<label class="check"><input type="checkbox"><span>Keep smiling, even on ordinary days.</span></label>
+<label class="check"><input type="checkbox"><span>Never forget how much you are worth.</span></label>
+<label class="check"><input type="checkbox"><span>Make more memories than excuses.</span></label>
+<label class="check"><input type="checkbox"><span>Choose happiness whenever you can.</span></label>
+</div>
+<p class="muted">And one more thing… leave your signature.</p>
+<canvas class="signaturePad" id="sig"></canvas>
+<button class="btn pink" id="unlock" disabled onclick="go(7)">Unlock the final room 🔒</button>
+<div class="nav"><button class="btn back" onclick="back()">← Back</button></div>
+</div></section>
+
+<section class="screen darkPage" id="s7"><div class="page center">
+<div class="final">
+<div class="bigHeart">♥</div>
+<div class="eyebrow">THE LAST ROOM</div>
+<h2>Happy<br>Birthday,<br><span>Simmi.</span></h2>
+<p class="muted">This little museum has only one purpose:</p>
+<p style="font-size:19px;line-height:1.8">to remind you that some people, some memories and some smiles are worth keeping forever. ❤️</p>
+<button class="btn" onclick="celebrate()">Open the final surprise ✨</button>
+<p class="tiny" id="finalMsg"></p>
+</div>
+</div>
+</section>
+
+<div class="toast" id="toast"></div>
+</div>
+<script>
+const screens=[...document.querySelectorAll('.screen')];let current=0;
+function dots(n){return [...Array(7)].map((_,i)=>'<i class="dot '+(i===n?'on':'')+'"></i>').join('')}
+document.querySelectorAll('[data-room]').forEach(x=>x.innerHTML=dots(+x.dataset.room));
+function go(n){current=n;screens.forEach((s,i)=>s.classList.toggle('active',i===n));document.querySelectorAll('.page').forEach(p=>p.scrollTop=0);if(n===4)buildPuzzle();if(n===6)initSig();if(n>=3)burst(45)}
+function back(){if(current>0)go(current-1)}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),1800)}
+
+const photos=document.getElementById('photos');let photoData=[];
+function renderPhotos(){photos.innerHTML='';for(let i=0;i<4;i++){let box=document.createElement('label');box.className='photo';box.id='photo'+i;
+if(photoData[i])box.innerHTML='<img src="'+photoData[i]+'"><button type="button" class="photoAdd" onclick="event.preventDefault();clearPhoto('+i+')">×</button>';
+else box.innerHTML='<span>＋<br>ADD PHOTO</span><button type="button" class="photoAdd">+</button>';
+let input=document.createElement('input');input.type='file';input.accept='image/*';input.onchange=e=>readPhoto(e,i);box.appendChild(input);photos.appendChild(box)}}
+function readPhoto(e,i){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=x=>{photoData[i]=x.target.result;renderPhotos();toast('Photo added ❤️')};r.readAsDataURL(f)}
+function clearPhoto(i){photoData[i]=null;renderPhotos()}
+renderPhotos();
+
+let tiles=[],selected=null;
+function startPuzzle(){go(4);setTimeout(buildPuzzle,50)}
+function buildPuzzle(){
+let source=photoData.find(Boolean);
+if(!source){source='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600"><rect width="100%" height="100%" fill="#eadfce"/><text x="50%" y="45%" text-anchor="middle" font-size="70">❤️</text><text x="50%" y="62%" text-anchor="middle" font-family="Georgia" font-size="28" fill="#806d5a">Simmi</text></svg>')}
+tiles=[0,1,2,3,4,5,6,7,8];do{tiles.sort(()=>Math.random()-.5)}while(tiles.every((v,i)=>v===i));
+const p=document.getElementById('puzzle');p.innerHTML='';selected=null;
+tiles.forEach((v,i)=>{let b=document.createElement('button');b.className='tile';b.style.backgroundImage='url("'+source+'")';b.style.backgroundPosition=(v%3)*50+'% '+Math.floor(v/3)*50+'%';b.dataset.i=i;b.onclick=()=>tileClick(i);p.appendChild(b)});
+updatePuzzle()
+}
+function tileClick(i){if(selected===null){selected=i;document.querySelectorAll('.tile')[i].classList.add('sel');return}
+if(selected===i){document.querySelectorAll('.tile')[i].classList.remove('sel');selected=null;return}
+[tiles[selected],tiles[i]]=[tiles[i],tiles[selected]];selected=null;buildFromTiles()}
+function buildFromTiles(){let source=photoData.find(Boolean);if(!source)return;let bs=document.querySelectorAll('.tile');tiles.forEach((v,i)=>{bs[i].style.backgroundImage='url("'+source+'")';bs[i].style.backgroundPosition=(v%3)*50+'% '+Math.floor(v/3)*50+'%'});updatePuzzle()}
+function updatePuzzle(){let good=tiles.filter((v,i)=>v===i).length;document.getElementById('puzzleMsg').textContent=good+' / 9 pieces in place';let b=document.getElementById('puzzleNext');b.disabled=good!==9;if(good===9){burst(80);toast('You did it! ❤️')}}
+function openLetter(){document.getElementById('letter').classList.add('open');document.getElementById('letterNext').disabled=false;burst(35)}
+
+const checks=[...document.querySelectorAll('#checks input')];
+checks.forEach(x=>x.onchange=()=>{x.parentElement.classList.toggle('done',x.checked);unlockCheck()});
+let sigReady=false;
+function unlockCheck(){document.getElementById('unlock').disabled=!(checks.every(x=>x.checked)&&sigReady)}
+const sc=document.getElementById('sig'),ctx=sc.getContext('2d');let drawing=false;
+function initSig(){let r=sc.getBoundingClientRect(),d=devicePixelRatio||1;sc.width=r.width*d;sc.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);ctx.strokeStyle='#9b652e';ctx.lineWidth=2.2;ctx.lineCap='round';sigReady=false}
+function pos(e){let r=sc.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:p.clientX-r.left,y:p.clientY-r.top}}
+function start(e){drawing=true;let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}
+function move(e){if(!drawing)return;let p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();sigReady=true;unlockCheck();e.preventDefault()}
+function end(){drawing=false}
+sc.addEventListener('mousedown',start);sc.addEventListener('mousemove',move);addEventListener('mouseup',end);
+sc.addEventListener('touchstart',start,{passive:false});sc.addEventListener('touchmove',move,{passive:false});sc.addEventListener('touchend',end);
+
+const canvas=document.getElementById('fx'),fx=canvas.getContext('2d');let W,H,bits=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}addEventListener('resize',resize);resize();
+function burst(n=80){let cs=['#f59e0b','#e86b80','#fff','#c084fc'];for(let i=0;i<n;i++)bits.push({x:W/2,y:H*.42,vx:(Math.random()-.5)*8,vy:-Math.random()*8-2,g:.15,r:Math.random()*6,c:cs[Math.floor(Math.random()*cs.length)]})}
+function anim(){fx.clearRect(0,0,W,H);bits.forEach((b,i)=>{b.vy+=b.g;b.x+=b.vx;b.y+=b.vy;b.r+=.1;fx.save();fx.translate(b.x,b.y);fx.rotate(b.r);fx.fillStyle=b.c;fx.fillRect(-4,-7,8,14);fx.restore();if(b.y>H+30)bits.splice(i,1)});requestAnimationFrame(anim)}anim();
+function celebrate(){burst(260);setTimeout(()=>burst(180),600);setTimeout(()=>burst(180),1200);document.getElementById('finalMsg').textContent='✨ Surprise unlocked. Now smile, Simmi. ❤️';toast('Happy Birthday, Simmi! 🎂')}
+</script>
+</body>
+</html>
