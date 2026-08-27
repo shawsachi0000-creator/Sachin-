@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>For My Best Sister ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#c92d43;--deep:#8f1730;--cream:#fff8ed;--ink:#542d34;--pink:#ffd9df}
+body{font-family:Georgia,"Times New Roman",serif;background:#20151a;overflow:hidden;color:var(--ink)}
+#app{width:100vw;height:100vh;position:relative;overflow:hidden;background:#fff4e8}
+.page{position:absolute;inset:0;display:none;overflow:hidden}
+.page.active{display:block;animation:in .65s ease}
+@keyframes in{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:scale(1)}}
+.paper{position:absolute;inset:0;background:
+linear-gradient(rgba(255,255,255,.25),rgba(255,255,255,.25)),
+repeating-linear-gradient(0deg,transparent 0 31px,rgba(110,75,45,.07) 32px),
+#fff8ed}
+.check{background-color:#fff4e9;background-image:linear-gradient(45deg,rgba(201,45,67,.10) 25%,transparent 25%,transparent 75%,rgba(201,45,67,.10) 75%),linear-gradient(45deg,rgba(201,45,67,.10) 25%,transparent 25%,transparent 75%,rgba(201,45,67,.10) 75%);background-position:0 0,14px 14px;background-size:28px 28px}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;height:100%}
+h1{font-size:clamp(34px,10vw,64px);color:var(--red);line-height:1.02;text-shadow:1px 2px #fff}
+h2{font-size:clamp(25px,7vw,44px);color:var(--deep)}
+.sub{font-family:Arial,sans-serif;font-size:15px;letter-spacing:1px;margin-top:10px}
+button{border:0;font-family:Arial,sans-serif;font-weight:800;letter-spacing:.7px;cursor:pointer}
+.btn{padding:14px 25px;border-radius:999px;background:var(--red);color:white;box-shadow:0 7px 0 #8e1b31,0 12px 25px #c92d4338;margin:8px;transition:.18s}
+.btn:active{transform:translateY(5px);box-shadow:0 2px 0 #8e1b31}
+.btn.alt{background:white;color:var(--red);border:2px solid var(--red);box-shadow:0 5px 0 #e6a0aa}
+.sticker{position:absolute;font-size:34px;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px) rotate(5deg)}}
+.tape{position:absolute;width:80px;height:24px;background:#efc8a4cc;transform:rotate(-5deg);top:12px;left:50%;margin-left:-40px}
+.hero-img{width:min(82vw,380px);height:min(46vh,310px);object-fit:cover;border:10px solid white;box-shadow:0 12px 30px #4b202633;transform:rotate(-2deg);border-radius:3px}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:min(92vw,440px);margin-top:20px}
+.photo-grid img{width:100%;height:25vh;max-height:210px;object-fit:cover;border:7px solid white;box-shadow:0 8px 18px #4b202633}
+.photo-grid img:nth-child(odd){transform:rotate(-3deg)}.photo-grid img:nth-child(even){transform:rotate(3deg)}
+.top{position:absolute;top:0;left:0;right:0;padding:18px;text-align:center;z-index:2}
+.back{position:absolute;left:14px;top:14px;padding:9px 13px;border-radius:50%;background:#fff;color:var(--red);box-shadow:0 4px 12px #0002;z-index:4}
+.gifts{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;width:min(90vw,420px);margin:25px auto}
+.gift{background:#fff;padding:18px;border-radius:18px;box-shadow:0 10px 25px #0002;cursor:pointer;position:relative}
+.gift .box{font-size:72px}.gift p{font:700 13px Arial;color:var(--red)}
+.certificate{width:min(92vw,440px);padding:25px 18px;border:7px double var(--red);background:#fffdf6;box-shadow:0 15px 35px #0002;position:relative}
+.certificate:before{content:"✦  ✧  ✦";display:block;color:#d99b31;font-size:23px;margin-bottom:8px}
+.award{font:800 12px Arial;letter-spacing:3px;color:#9d6a21}
+.cert-name{font-size:38px;color:var(--red);margin:12px 0}
+.cert-line{height:1px;background:#d8aa62;width:75%;margin:8px auto 14px}
+.memory-title{margin-top:65px}
+.string{position:absolute;top:24%;left:4%;right:4%;height:2px;background:#72523c;transform:rotate(-2deg)}
+.clips{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:90%;margin-top:30px}
+.clip{position:relative}.clip:before{content:"📌";position:absolute;top:-17px;left:50%;z-index:3}
+.clip img{width:100%;height:21vh;object-fit:cover;border:7px solid white;box-shadow:0 8px 15px #0003}
+.letter-wrap{height:100%;overflow:auto;padding:55px 24px 100px;background:radial-gradient(circle at 50% 0,#fff 0 10%,#fff8ed 55%,#f5e4d1)}
+.letter{max-width:480px;margin:0 auto;background:#fffdf7;padding:28px 22px;border:1px solid #e7cdb2;box-shadow:0 8px 25px #0001;line-height:1.8;font-size:17px;position:relative}
+.letter p{margin-bottom:15px}.signature{font-size:21px;color:var(--red);text-align:right}
+.final{background:linear-gradient(160deg,#fff0f2,#fff9e9);text-align:center}
+.bigheart{font-size:90px;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.15)}}
+.music{position:fixed;right:12px;bottom:12px;z-index:99;background:#fff;border:2px solid var(--red);color:var(--red);padding:9px 12px;border-radius:999px;font:700 12px Arial;box-shadow:0 5px 18px #0002}
+.music input{display:none}
+.dots{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#b86b76;font:12px Arial}
+@media(min-width:600px){#app{max-width:500px;margin:auto;box-shadow:0 0 50px #0008}.page{max-width:500px}}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- PAGE 1 -->
+<section class="page active check" id="p1">
+<div class="sticker" style="top:8%;left:8%">🌸</div><div class="sticker" style="top:12%;right:9%;animation-delay:.5s">✨</div>
+<div class="center">
+<div style="font-size:58px">🎁</div>
+<p class="sub">A LITTLE SURPRISE FOR YOU</p>
+<h1 style="margin-top:12px">I made<br>something<br>for you...</h1>
+<p style="margin:16px 0 8px;font:italic 17px Georgia">Do you wanna see it?</p>
+<div><button class="btn" onclick="go(2)">YES ❤️</button><button class="btn alt" onclick="nope()">NO 🙈</button></div>
+</div><div class="dots">1 / 9</div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page check" id="p2">
+<button class="back" onclick="go(1)">‹</button>
+<div class="center">
+<div style="font-size:45px">💌</div>
+<h2>A Special Surprise</h2>
+<p class="sub" style="max-width:330px">Because having a sister like you deserves more than just one message.</p>
+<div class="gifts">
+<div class="gift" onclick="go(3)"><div class="box">🎁</div><p>OPEN GIFT 1</p></div>
+<div class="gift" onclick="go(4)"><div class="box">🎀</div><p>OPEN GIFT 2</p></div>
+<div class="gift" onclick="go(5)"><div class="box">🏆</div><p>YOUR AWARD</p></div>
+<div class="gift" onclick="go(6)"><div class="box">📸</div><p>MEMORIES</p></div>
+</div>
+<p style="font:italic 14px Georgia">Each little gift has something for you ✨</p>
+</div><div class="dots">2 / 9</div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="p3">
+<button class="back" onclick="go(2)">‹</button>
+<div class="center check">
+<div style="font-size:48px">🎀</div><h2>Happy Rakshabandhan</h2>
+<p class="sub">To the most special sister</p>
+<img class="hero-img" src="images/photo1.jpg" alt="Sister">
+<p style="margin:15px 0;font-size:20px;color:var(--red)">Best Sister ❤️</p>
+<button class="btn" onclick="go(7)">CLICK ME ✨</button>
+</div><div class="dots">3 / 9</div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page check" id="p4">
+<button class="back" onclick="go(2)">‹</button>
+<div class="center">
+<div style="font-size:50px">🌷</div>
+<h2>For You</h2>
+<p class="sub" style="max-width:320px">A sister is a little bit of childhood that can never be lost.</p>
+<img class="hero-img" src="images/photo2.jpg" alt="Sister">
+<button class="btn" onclick="go(7)">ONE MORE ✨</button>
+</div><div class="dots">4 / 9</div>
+</section>
+
+<!-- PAGE 5 CERTIFICATE -->
+<section class="page check" id="p5">
+<button class="back" onclick="go(2)">‹</button>
+<div class="center">
+<div class="certificate">
+<div class="award">OFFICIAL CERTIFICATE</div>
+<h2 style="font-size:31px;margin-top:6px">BEST SISTER</h2>
+<div class="cert-line"></div>
+<p style="font:15px Arial;letter-spacing:1px">THIS AWARD IS PROUDLY PRESENTED TO</p>
+<div class="cert-name">Best Sister</div>
+<p style="font:italic 15px Georgia">For being loving, caring, annoying, funny,<br>and absolutely irreplaceable. ❤️</p>
+<div style="margin-top:20px;font-size:27px">🏆 ✨ 🏆</div>
+<p style="margin-top:12px;font:700 12px Arial;color:#9d6a21">WITH LOVE • ALWAYS</p>
+</div>
+<button class="btn" onclick="go(6)">VIEW MEMORIES 📸</button>
+</div><div class="dots">5 / 9</div>
+</section>
+
+<!-- PAGE 6 MEMORIES -->
+<section class="page check" id="p6">
+<button class="back" onclick="go(2)">‹</button>
+<div class="top"><h2 class="memory-title">Our Little Memories</h2><p class="sub">Some moments are forever 💕</p></div>
+<div class="string"></div>
+<div class="center" style="padding-top:100px">
+<div class="clips">
+<div class="clip"><img src="images/photo1.jpg"></div>
+<div class="clip"><img src="images/photo2.jpg"></div>
+<div class="clip"><img src="images/photo3.jpg"></div>
+<div class="clip"><img src="images/photo4.jpg"></div>
+<div class="clip"><img src="images/photo5.jpg"></div>
+<div class="clip"><img src="images/photo6.jpg"></div>
+</div>
+<button class="btn" onclick="go(7)" style="margin-top:22px">NEXT 💌</button>
+</div><div class="dots">6 / 9</div>
+</section>
+
+<!-- PAGE 7 -->
+<section class="page" id="p7">
+<button class="back" onclick="go(2)">‹</button>
+<div class="center check">
+<div style="font-size:42px">💗</div>
+<h2>You are my...</h2>
+<div style="font-size:23px;line-height:1.75;margin:20px 0">
+<p>🌸 Forever friend</p><p>😂 Partner in crime</p><p>🫶 Secret keeper</p><p>✨ Best sister ever</p>
+</div>
+<img class="hero-img" style="height:28vh" src="images/photo3.jpg">
+<button class="btn" onclick="go(8)">READ MY LETTER 💌</button>
+</div><div class="dots">7 / 9</div>
+</section>
+
+<!-- PAGE 8 LETTER -->
+<section class="page" id="p8">
+<button class="back" onclick="go(7)">‹</button>
+<div class="letter-wrap">
+<div class="letter">
+<div style="text-align:center;font-size:35px">💌</div>
+<h2 style="text-align:center;font-size:29px;margin-bottom:18px">A Letter For You</h2>
+<p>Dear Best Sister,</p>
+<p>Sometimes I don't say it enough, but I am genuinely lucky to have you in my life. You make ordinary days brighter and difficult days a little easier.</p>
+<p>We may fight, tease each other and annoy each other like crazy 😂, but underneath all of that is a bond I would never trade for anything.</p>
+<p>On this Rakshabandhan, I just want you to know that you will always have a special place in my heart.</p>
+<p>Keep smiling, keep shining and always be the amazing person you are. 🌸</p>
+<p>Happy Rakshabandhan, <b>Best Sister</b>. ❤️</p>
+<p class="signature">— Always your brother ✨</p>
+<div style="text-align:center;font-size:30px">🌷 🫶 🌷</div>
+</div>
+<div style="text-align:center;margin:18px"><button class="btn" onclick="go(9)">ONE LAST THING ❤️</button></div>
+</div><div class="dots">8 / 9</div>
+</section>
+
+<!-- PAGE 9 -->
+<section class="page final" id="p9">
+<div class="center">
+<div class="bigheart">❤️</div>
+<p class="sub">ONE LAST THING...</p>
+<h1 style="font-size:45px;margin:14px 0">Thank You<br>For Being<br>My Sister</h1>
+<p style="font-size:19px;max-width:350px;line-height:1.6">No matter how much we grow up, you'll always be my little piece of home. 🫶</p>
+<div style="font-size:38px;margin:20px">🌸 ✨ 🎀 ✨ 🌸</div>
+<p style="font:italic 16px Georgia">Happy Rakshabandhan ❤️</p>
+<button class="btn" onclick="go(1)">WATCH AGAIN ↻</button>
+</div><div class="dots">9 / 9</div>
+</section>
+
+<button class="music" onclick="document.getElementById('musicFile').click()">🎵 ADD MUSIC</button>
+<input id="musicFile" type="file" accept="audio/*" onchange="loadMusic(event)">
+<audio id="audio" loop></audio>
+</div>
+
+<script>
+let current=1;
+function go(n){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('p'+n).classList.add('active');
+ current=n;
+ window.scrollTo(0,0);
+}
+function nope(){
+ alert("Nice try 😭❤️ The YES button is waiting for you!");
+}
+function loadMusic(e){
+ const file=e.target.files[0];
+ if(!file)return;
+ const audio=document.getElementById('audio');
+ audio.src=URL.createObjectURL(file);
+ audio.play().catch(()=>{});
+ document.querySelector('.music').textContent="🎵 MUSIC ON";
+}
+</script>
+</body>
+</html>
